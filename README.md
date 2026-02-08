@@ -1,6 +1,6 @@
-# Chall - Your Challenge Title
+# Chall - Jester's Blog
 
-> A brief description of the challenge
+> A union-based sqli challenge (built on top of MariaDB).
 
 ## Challenge Type
 
@@ -14,30 +14,16 @@
 
 ## Designer(s)
 
-- Ada Lovelace
-- Barbara Liskov
+- Boisghur Shishani
 
 ## Description
 
-A high-level overview intended to clarify the concept and intuition behind the challenge, outlining its educational
-goals and the skills it aims to test in participants.
+A union-based sqli challenge (built on top of MariaDB).
 
-**IMPORTANT:** This description will **NOT** be shared with participants.
 
 ## Category(ies)
 
-- `pwn`
-- `re`
 - `web`
-- `stegano`
-- `env`
-- `crypto`
-- `osint`
-- `web3`
-- `ai`
-- `android`
-- `auto`
-- `misc`
 
 ---
 

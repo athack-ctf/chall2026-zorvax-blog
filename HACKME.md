@@ -1,10 +1,3 @@
-The description of your challenge as seen by participants in CTFd. Try to make it feel within the theme
-of the event...
-
----
-If your challenge is a multi-flag one (i.e., it consists of a sequence of sub-challenges each rewarded with
-its own flag), requiring a different description for each sub-challenge, then have your descriptions split as 
-done with this paragraph, and the next one.
-
----
-Obviously, for each sub-challenge, you should provide its flag value in [solution/FLAGS.md](solution/FLAGS.md).
+We found Jester's secret blog page from last year. He used to share his thoughts with like-minded neural networks.
+It seems to be filled with AI propaganda as well as subtle hints at plans for world domination! Perhaps there is more than meets the eye... 
+If you are able login as Jester, perhaps you'll find something useful before the Aliens put their hand on it!!
