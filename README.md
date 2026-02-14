@@ -1,4 +1,4 @@
-# Chall - Jester's Blog
+# Chall - Zorvax's Blog
 
 > A union-based sqli challenge (built on top of MariaDB).
 
@@ -65,4 +65,5 @@ A union-based sqli challenge (built on top of MariaDB).
 
 - **[source/Dockerfile](source/Dockerfile)**: Needed for building a containerized image of the online challenge.
 - **[source/docker-compose.yml](source/docker-compose.yml)**: Needed for a configuration-free run of the online
+
   challenge
