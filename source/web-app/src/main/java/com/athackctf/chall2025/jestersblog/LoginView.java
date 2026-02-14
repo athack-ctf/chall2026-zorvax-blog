@@ -23,8 +23,8 @@ public class LoginView extends VerticalLayout {
     public LoginView(UsersService usersService) {
         loginOverlay = new LoginOverlay();
         loginOverlay.setOpened(true);
-        loginOverlay.setTitle("Welcome Back, Jester");
-        loginOverlay.setDescription("Login to access your secrets.");
+        loginOverlay.setTitle("Welcome Back, Zorvax");
+        loginOverlay.setDescription("No humans allowed.");
         loginOverlay.setForgotPasswordButtonVisible(false);
 
         this.usersService = usersService;
@@ -53,7 +53,6 @@ public class LoginView extends VerticalLayout {
             }
         });
 
-
         add(closeButton, loginOverlay);
     }
 
@@ -64,7 +63,7 @@ public class LoginView extends VerticalLayout {
     private void showSuccessPopup() {
         Dialog dialog = new Dialog();
         dialog.add(new H2("Authentication Successful!"),
-                new Paragraph("Here's your Flag: ATHACKCTF{P4TCH_4_HUM4N1TY}"));
+                new Paragraph("Here's your Flag: ATHACKCTF{Z0RV4X_THE_D3S7R0Y3R}"));
         dialog.setWidth("400px");
         dialog.setHeight("200px");
 

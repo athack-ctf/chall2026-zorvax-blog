@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-@PageTitle("Jester's Blog")
+@PageTitle("Zorvax's Blog")
 @Route("")
 public class MainView extends VerticalLayout {
     private final BlogPostsService blogPostService;
@@ -37,7 +37,7 @@ public class MainView extends VerticalLayout {
         searchField.setWidth("500px");
 
         var JestersBlogLogo = new Image("img/JestersBlog.png", "Jester");
-        var strJesters = new H1("Jester's Blog");
+        var strJesters = new H1("Zorvax's Blog");
 
         this.blogPostService = blogPostService;
 
@@ -52,11 +52,8 @@ public class MainView extends VerticalLayout {
             return post.getBody().replaceAll("<[^>]*>", "");
         }).setHeader("Body").setTextAlign(ColumnTextAlign.CENTER);
 
-        Button loginButton = new Button("Go to Login", event ->
-                getUI().ifPresent(ui -> ui.navigate("login"))
-        );
+        Button loginButton = new Button("Go to Login", event -> getUI().ifPresent(ui -> ui.navigate("login")));
         loginButton.getStyle().set("margin-left", "auto");
-
 
         searchButton.addClickListener(event -> {
             String searchQuery = searchField.getValue();
@@ -67,7 +64,7 @@ public class MainView extends VerticalLayout {
         });
 
         blogGrid.setHeightFull();
-        //blogGrid.addThemeVariants(GridVariant.LUMO_WRAP_CELL_CONTENT);
+        // blogGrid.addThemeVariants(GridVariant.LUMO_WRAP_CELL_CONTENT);
         blogGrid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
         blogGrid.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS);
 
@@ -91,7 +88,6 @@ public class MainView extends VerticalLayout {
         searchLayout.setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);
         setAlignItems(Alignment.CENTER);
-
 
         blogGrid.setItems(blogPostService.getAllBlogPosts());
         setSizeFull();
