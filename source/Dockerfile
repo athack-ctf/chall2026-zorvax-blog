@@ -37,7 +37,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Update package list and install necessary dependencies
 RUN apt update && \
     apt install -y wget lsb-release gnupg && \
-    wget -O /tmp/mysql-apt-config.deb https://dev.mysql.com/get/mysql-apt-config_0.8.29-1_all.deb && \
+    wget -O /tmp/mysql-apt-config.deb https://repo.mysql.com//mysql-apt-config_0.8.36-1_all.deb && \
     dpkg -i /tmp/mysql-apt-config.deb && \
     apt update && \
     apt install -y mysql-server && \

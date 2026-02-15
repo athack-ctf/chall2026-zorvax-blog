@@ -1,7 +1,0 @@
-services:
-  jestersblog:
-    build: .
-    image: athack-ctf/chall2025-jestersblog:latest
-    hostname: jestersblog
-    ports:
-      - "2025:8080"
