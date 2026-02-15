@@ -1,53 +1,47 @@
-########################################################################################################################
-# Building jestersblog.jar
-########################################################################################################################
-
-# Use official maven image to build the project
+# --- Stage 1: Build ---
 FROM maven:3.8.4-openjdk-17-slim AS build
-
-# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the pom.xml and download dependencies
-COPY web-app/pom.xml ./
+# Install binutils to provide 'objcopy' for jlink
+RUN apt-get update && apt-get install -y binutils && rm -rf /var/lib/apt/lists/*
 
-# Download dependencies (if they are not already cached in the local Maven repository)
-RUN mvn dependency:resolve
+# Create a custom minimal JRE
+RUN jlink \
+    --add-modules java.base,java.sql,java.naming,java.desktop,java.management,java.security.jgss,java.instrument \
+    --strip-debug \
+    --no-man-pages \
+    --no-header-files \
+    --compress=2 \
+    --output /javaruntime
 
-# Copy the rest of the project files
+COPY web-app/pom.xml .
+RUN mvn dependency:go-offline -B
 COPY web-app/src ./src
+RUN mvn clean package -DskipTests
 
-# Build the application
-RUN mvn clean install -DskipTests
 
-########################################################################################################################
-# Deploying jestersblog.jar with a mysql database
-########################################################################################################################
 
-# Use OpenJDK image for the runtime environment
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:17-jre-alpine AS runtime
 
-########################################################################################################################
-# 1 - Installing mysql server
-########################################################################################################################
+# Install MySQL and clean up in a single layer to minimize footprint
+# Using Alpine packages here for maximum size reduction
+RUN apk add --no-cache mysql mysql-client bash
 
-# Set the environment variable to avoid interactive prompts
-ENV DEBIAN_FRONTEND=noninteractive
+# Setup MySQL directories
+RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql
 
-# Update package list and install necessary dependencies
-RUN apt update && \
-    apt install -y wget lsb-release gnupg && \
-    wget -O /tmp/mysql-apt-config.deb https://repo.mysql.com//mysql-apt-config_0.8.36-1_all.deb && \
-    dpkg -i /tmp/mysql-apt-config.deb && \
-    apt update && \
-    apt install -y mysql-server && \
-    rm -rf /var/lib/apt/lists/* /tmp/mysql-apt-config.deb
-
-# Copy the SQL seed file into the container
+WORKDIR /app
+COPY --from=build /app/target/*.jar jestersblog.jar
 COPY db/jesterdb1.sql /db/jesterdb1.sql
 
-# Expose MySQL port
+#################################################
+
+
 EXPOSE 3306
+
+
+
+
 
 ########################################################################################################################
 # 2 - Getting jesterblog.jar
