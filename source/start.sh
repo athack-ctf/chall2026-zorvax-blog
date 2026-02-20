@@ -43,5 +43,14 @@ if [ -f /db/jesterdb1.sql ]; then
 fi
 
 echo "Database ready. Starting Java App..."
+
 # Use exec so Java catches signals
-exec java -jar /app/jestersblog.jar
+
+exec java -Xms64m -Xmx96m \
+     -XX:MaxMetaspaceSize=96m \
+     -Xss512k \
+     -XX:+UseSerialGC \
+     -XX:+OptimizeStringConcat \
+     -XX:TieredStopAtLevel=1 \
+     -XX:+UseStringDeduplication \
+     -jar /app/jestersblog.jar

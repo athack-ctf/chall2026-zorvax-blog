@@ -27,6 +27,8 @@ FROM eclipse-temurin:17-jre-alpine AS runtime
 # Using Alpine packages here for maximum size reduction
 RUN apk add --no-cache mysql mysql-client bash
 
+COPY my.cnf /etc/my.cnf
+
 # Setup MySQL directories
 RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql
 
@@ -65,6 +67,7 @@ COPY start.sh /start.sh
 
 # Make the script executable
 RUN chmod +x /start.sh
+
 
 # Set the shell script as the entrypoint to start both services
 ENTRYPOINT ["/start.sh"]
