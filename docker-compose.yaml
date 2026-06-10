@@ -5,7 +5,7 @@ services:
     image: athack-ctf/chall2026-zorvax-blog:latest
     container_name: chall2026-zorvax-blog
     build:
-      context: .
-      dockerfile: source/Dockerfile
+      context: ./source
+      dockerfile: Dockerfile
     ports:
       - "53027:8080"
